@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Colombianos detenidos en el exterior: tres preguntas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Work+Sans:wght@400;600&display=swap">
+<style>
+:root{--bg:#fdfdfc;--ink:#222220;--mute:#6d6d67;--line:#e4e4df;--a:#2f7d57;--b:#e0a100;--soft:#eaf2ec;--hl:#fff0b3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 clamp(15px,1.5vw,19px)/1.55 "Work Sans",system-ui,sans-serif;display:flex;flex-direction:column}
+h1,h2{font-family:"Bitter",Georgia,serif;line-height:1.12;margin:0 0 .5em;font-weight:700}
+h1{font-size:clamp(30px,5vw,58px);max-width:17em}
+h2{font-size:clamp(26px,3.6vw,42px)}
+.deck{flex:1;min-height:0;position:relative}
+.slide{position:absolute;inset:0;display:none;padding:clamp(18px,4vw,56px) clamp(18px,6vw,88px);overflow-y:auto}
+.slide.on{display:block}
+.grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(18px,4vw,64px);align-items:center;min-height:100%}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.lead{font-size:1.15em;max-width:34em}
+.mute{color:var(--mute)}
+.big{font-family:"Bitter",Georgia,serif;font-size:clamp(40px,7vw,88px);font-weight:700;color:var(--a);line-height:1;margin-bottom:.2em}
+.q{display:inline-block;background:var(--hl);padding:.1em .55em;border-radius:3px;margin-bottom:.9em;font-size:.9em}
+ul.plain{list-style:none;padding:0;margin:1em 0 0}
+ul.plain li{padding:.7em 0;border-top:1px solid var(--line)}
+ul.plain li:last-child{border-bottom:1px solid var(--line)}
+ul.plain b{color:var(--a)}
+.chart{padding:clamp(4px,1vw,12px) 0}
+.row{display:grid;grid-template-columns:minmax(90px,150px) 1fr 3.4em;gap:.6em;align-items:center;margin:.4em 0;font-size:.88em}
+.row span:first-child{text-align:right;color:var(--mute)}
+.track{background:var(--soft);height:1.1em;border-radius:2px;overflow:hidden}
+.fill{height:100%;background:var(--a)}
+.fill.b{background:var(--b)}
+.row .v{font-weight:600}
+.pair .track{height:.75em;margin:2px 0}
+.leg{display:flex;gap:1.2em;font-size:.85em;margin-bottom:.6em}
+.dot{display:inline-block;width:.8em;height:.8em;border-radius:2px;margin-right:.35em;background:var(--a)}
+.dot.b{background:var(--b)}
+.cols{display:flex;align-items:flex-end;gap:.5em;height:230px;border-bottom:1px solid var(--ink)}
+.col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.78em}
+.col i{display:block;width:100%;background:var(--a);border-radius:2px 2px 0 0}
+.lab{display:flex;gap:.5em;font-size:.78em;color:var(--mute);margin-top:.35em}.lab span{flex:1;text-align:center}
+.note{background:var(--hl);padding:.7em .9em;border-radius:4px;margin-top:1em;font-size:.93em}
+.ans{border-top:1px solid var(--ink);padding-top:.7em;margin-top:1em}
+.ans b{font-family:"Bitter",Georgia,serif;font-size:1.1em}
+nav{display:flex;align-items:center;justify-content:space-between;gap:1em;padding:.7em clamp(18px,6vw,88px);border-top:1px solid var(--line)}
+button{font:inherit;background:var(--ink);color:#fff;border:0;border-radius:4px;padding:.5em 1.1em;cursor:pointer}
+button:disabled{opacity:.3;cursor:default}
+button:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="deck" id="deck">
+
+<section class="slide on"><div class="grid">
+<div><h1>¿Dónde están, qué delitos los llevaron allí y cómo ha cambiado?</h1>
+<p class="lead">Radiografía de los colombianos detenidos en el exterior, con datos de la Cancillería (datos.gov.co), del 17 de septiembre de 2018 al 1 de noviembre de 2025.</p></div>
+<div class="chart"><p class="mute" style="margin-top:0">Tres preguntas guían el análisis:</p>
+<ul class="plain"><li><b>1.</b> ¿En qué consulados hay más detenidos y por qué delitos?</li><li><b>2.</b> ¿Cómo cambió el total y la composición entre 2018 y 2025?</li><li><b>3.</b> ¿Hay diferencias por género en el delito y la situación jurídica?</li></ul></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><h2>Antes de responder: ¿qué estamos contando?</h2>
+<div class="big">355.552 filas</div>
+<p class="lead">no son 355.552 personas. Si las sumáramos, contaríamos muchas veces a la misma gente.</p></div>
+<div class="chart"><ul class="plain" style="margin-top:0">
+<li><b>Cada fila es un grupo</b> de personas (columna CANTIDAD), no un individuo.</li>
+<li><b>Cada foto mensual repite a las mismas personas.</b> Por eso usamos una sola foto, la del 01/11/2025: 27.586 personas en 117 consulados.</li>
+<li><b>La ubicación se mide por consulado.</b> Desde 2023 el país de prisión no se reporta.</li>
+<li><b>Una trampa escondida:</b> una categoría de delito escrita con dos guiones distintos habría producido un salto falso en 2022. La unimos.</li></ul></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><span class="q">Pregunta 1, primera parte</span><h2>¿En qué consulados hay más detenidos?</h2>
+<p class="lead">Madrid y Panamá reúnen más de una quinta parte del total. Los 15 primeros consulados concentran el 62,5 %.</p>
+<p class="note">BTA. Asistencia (puesto 7) no es un consulado de un país: aparece asociada a Estados Unidos, España, Venezuela, Argentina y Chile. La conservamos, pero la interpretamos como una oficina de asistencia.</p></div>
+<div class="chart"><div id="c1"></div><p class="mute" style="font-size:.8em;margin:.6em 0 0">Personas detenidas por consulado, 01/11/2025. Los valores a la derecha son % del total.</p></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><span class="q">Pregunta 1, segunda parte</span><h2>¿Por qué delitos?</h2>
+<p class="lead">El narcotráfico es el delito más frecuente: 41,5 % de todas las personas y 50,7 % de las que tienen delito reportado.</p>
+<p>Pero el perfil cambia por consulado: narcotráfico en Panamá (71 %), Houston (66 %) y Santiago (57 %); más robo en Santiago y Lima; homicidio en Guayaquil (15 %).</p>
+<p class="note">Cuidado con Madrid: 44 % de sus personas no tiene delito conocido, y en San Cristóbal es el 64 %. Ahí no podemos concluir qué delito predomina.</p></div>
+<div class="chart"><div id="c2"></div><p class="mute" style="font-size:.8em;margin:.6em 0 0">% de las 27.586 personas por delito. El 18,2 % no tiene delito conocido.</p></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><span class="q">Pregunta 2</span><h2>¿Cómo cambió entre 2018 y 2025?</h2>
+<p class="lead">El total subió 18,5 %. La composición cambió poco, pero en una dirección clara.</p>
+<ul class="plain">
+<li><b>Narcotráfico:</b> de 46,9 % a 41,5 %.</li>
+<li><b>Condenados:</b> de 52,7 % a 47,1 %.</li>
+<li><b>En investigación:</b> de 36,7 % a 40,0 %.</li>
+<li><b>Mujeres:</b> casi igual, de 12,5 % a 12,2 %.</li></ul>
+<p class="note">Por consulado: Madrid (+1.097), Panamá (+868) y Santiago (+641) crecieron; Quito (−574), Atlanta (−563) y Tulcán (−536) bajaron. 2018 es una sola foto, así que no es una tendencia, es una comparación.</p></div>
+<div class="chart"><div class="cols" id="c3"></div><div class="lab" id="c3l"></div><p class="mute" style="font-size:.8em;margin:.6em 0 0">Personas en la última foto de cada año. Máximo: 28.058 (diciembre de 2022).</p></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><span class="q">Pregunta 3</span><h2>¿Hay diferencias por género?</h2>
+<p class="lead">Sí, pero no donde uno esperaría. En narcotráfico casi no hay diferencia general; sí la hay en otros delitos y en la situación jurídica.</p>
+<p>El 48,2 % de los hombres está condenado, frente al 39,0 % de las mujeres. Las mujeres están más en investigación (45,1 % frente a 39,3 %).</p>
+<p class="note">El giro: dentro de cada consulado el narcotráfico por género va en direcciones opuestas. En Santiago es 76 % en mujeres y 55 % en hombres; en Panamá es 57 % y 73 %. El promedio general esconde esas diferencias.</p></div>
+<div class="chart"><div class="leg"><span><i class="dot"></i>Mujeres (3.363)</span><span><i class="dot b"></i>Hombres (24.209)</span></div><div id="c4"></div><p class="mute" style="font-size:.8em;margin:.6em 0 0">% dentro de cada género, 01/11/2025.</p></div>
+</div></section>
+
+<section class="slide"><div>
+<h2>Lo que respondimos, y lo que no</h2>
+<div class="grid" style="align-items:start;min-height:0">
+<div>
+<div class="ans" style="margin-top:0"><b>1. Dónde y por qué.</b> Muy concentrados: Madrid 12,3 % y Panamá 8,3 %. Domina el narcotráfico, con perfiles distintos por consulado.</div>
+<div class="ans"><b>2. Cambio.</b> Más personas (+18,5 %), menos narcotráfico y condenados, más personas en investigación.</div>
+<div class="ans"><b>3. Género.</b> Hombres más condenados; mujeres más en investigación. El narcotráfico por género depende del consulado.</div></div>
+<div class="chart"><p style="margin-top:0"><b>Límites que hay que decir en voz alta</b></p>
+<ul class="plain" style="margin-top:.3em">
+<li>El 18,2 % no tiene delito conocido y el 31 % no tiene grupo de edad.</li>
+<li>El país de prisión no se reporta desde 2023, y el consulado es solo una aproximación.</li>
+<li>Son comparaciones entre grupos: no demuestran causas.</li></ul></div>
+</div></div></section>
+
+</main>
+<nav><button id="prev">Anterior</button><span id="count" class="mute"></span><button id="next">Siguiente</button></nav>
+
+<script>
+function bars(id, rows, cls){
+  var el=document.getElementById(id), max=Math.max.apply(null, rows.map(function(r){return r[1];}));
+  el.innerHTML=rows.map(function(r){
+    return '<div class="row"><span>'+r[0]+'</span><div class="track"><div class="fill '+(cls||'')+'" style="width:'+(r[1]/max*100)+'%"></div></div><span class="v">'+r[2]+'</span></div>';
+  }).join('');
+}
+bars('c1',[['Madrid',3391,'12,3'],['Panamá',2301,'8,3'],['Santiago',1644,'6,0'],['San Cristóbal',1106,'4,0'],['Lima',1065,'3,9'],['México',1037,'3,8'],['BTA. Asistencia',1002,'3,6'],['Houston',946,'3,4'],['Guayaquil',791,'2,9'],['Barcelona',778,'2,8']]);
+bars('c2',[['Narcotráfico',41.5,'41,5'],['Delito desconocido',14.6,'14,6'],['Robo / hurto',11.8,'11,8'],['Homicidio',5.4,'5,4'],['Otros',4.5,'4,5'],['No reporta',3.5,'3,5'],['Delitos sexuales',3.2,'3,2']]);
+var anios=[['2018',23284],['2019',25506],['2020',26447],['2021',26767],['2022',28058],['2023',26390],['2024',26776],['2025',27586]];
+document.getElementById('c3').innerHTML=anios.map(function(a){return '<div class="col">'+(a[1]/1000).toFixed(1).replace('.',',')+'k<i style="height:'+(a[1]/28058*88)+'%"></i></div>';}).join('');
+document.getElementById('c3l').innerHTML=anios.map(function(a){return '<span>'+a[0]+'</span>';}).join('');
+var g=[['Condenado',39.0,48.2],['En investigación',45.1,39.3],['Narcotráfico',40.7,41.6],['Robo / hurto',9.5,12.1],['Homicidio',2.8,5.7],['Delitos sexuales',1.0,3.5],['Delito migratorio',4.8,1.6]];
+document.getElementById('c4').innerHTML=g.map(function(r){
+  return '<div class="row pair"><span>'+r[0]+'</span><div><div class="track"><div class="fill" style="width:'+(r[1]/50*100)+'%"></div></div><div class="track"><div class="fill b" style="width:'+(r[2]/50*100)+'%"></div></div></div><span class="v">'+String(r[1]).replace('.',',')+' / '+String(r[2]).replace('.',',')+'</span></div>';
+}).join('');
+
+var slides=[].slice.call(document.querySelectorAll('.slide')), i=0;
+var prev=document.getElementById('prev'), next=document.getElementById('next'), count=document.getElementById('count');
+function show(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach(function(s,k){s.classList.toggle('on',k===i);});
+  slides[i].scrollTop=0;
+  count.textContent=(i+1)+' de '+slides.length;
+  prev.disabled=i===0; next.disabled=i===slides.length-1;
+}
+prev.onclick=function(){show(i-1);}; next.onclick=function(){show(i+1);};
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();show(i+1);}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();show(i-1);}
+});
+var x0=null;
+document.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){if(x0===null)return;var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>60)show(i+(d<0?1:-1));x0=null;},{passive:true});
+show(0);
+</script>
+</body>
+</html>
