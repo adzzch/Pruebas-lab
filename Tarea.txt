@@ -1,0 +1,608 @@
+hola necesito que me ayudes con un trabajo que le tenfo que hacer a un datset
+¡Hola! Claro, con gusto te ayudo con tu trabajo sobre el dataset. Para orientarte bien, cuéntame un poco más:
+¿Qué tienes que hacer con el dataset? (por ejemplo: limpieza de datos, análisis exploratorio, visualizaciones, un modelo de machine learning, estadística descriptiva, un informe…)
+¿En qué formato está? (CSV, Excel, JSON, etc.). Si puedes, sube el archivo aquí y lo reviso directamente.
+¿Qué herramienta o lenguaje debes usar? (Python, R, Excel, SQL…)
+¿Hay instrucciones o una rúbrica del trabajo? Si las tienes, compártelas para ajustarme a lo que piden.
+Con eso ya puedo empezar a ayudarte.
+Dataset real: Procedencia y URL declaradas en la primera celda del notebook.
+Limpieza visible: Justificación de cómo trataron nulos, tipos de datos e inconsistencias.
+Univariado completo: Histograma + boxplot para variables clave.
+Bivariado completo: Heatmap de la matriz de correlación + scatter plots para pares clave.
+Agregaciones: Comparaciones por grupos usando groupby.
+Conclusiones: Respuestas claras a las preguntas iniciales de investigación.
+Pueden presentar en el junyper o en una presentación, pero el entregable debe ser en el junyper
+dataset mínimo de 10000 filas y 7 columnas ya tengo un excel del data set entoncves con ese sirve
+Checking whether a dataset file actually exists.
+Checking whether a dataset file actually exists.
+Voy a revisar si el archivo llegó.
+Ejecutó un comando
+No me llegó el archivo: la carpeta de subidas está vacía. Súbelo aquí (el Excel, .xlsx) y con él armo el notebook (.ipynb) completo.
+Ya tengo claro lo que pide la rúbrica, y el notebook quedará así:
+Primera celda: procedencia del dataset y URL. Necesito que me digas de dónde lo descargaste (Kaggle, datos.gov.co, etc.) y el enlace.
+Limpieza: revisión de nulos, tipos de datos, duplicados e inconsistencias, con una explicación escrita de cada decisión.
+Univariado: histograma y boxplot de las variables numéricas clave.
+Bivariado: heatmap de correlación y scatter plots de los pares más relevantes.
+Agregaciones: comparaciones por grupos con groupby.
+Conclusiones: respuestas a las preguntas de investigación.
+Además de subir el archivo, dime:
+¿Cuáles son las preguntas de investigación? Si el profe las dio, pégalas tal cual. Si no las tienes, las propongo yo a partir de los datos.
+¿De dónde salió el dataset? Nombre y URL para la primera celda.
+Apenas los tenga, empiezo.
+pues las preguntas no las dio imagino que son preguntas que uno va sacando o queSí, normalmente las preguntas de investigación las plantea uno mismo a partir del dataset. Como el profe no las dio, tienes libertad de elegirlas, y lo ideal es que sean preguntas que los datos puedan responder con lo que te piden en la rúbrica: distribuciones, correlaciones y comparaciones por grupos.
+Algunos ejemplos del tipo de pregunta que funciona bien:
+
+Univariado: ¿cómo se distribuye la variable X? ¿tiene valores atípicos o sesgo?
+Bivariado: ¿qué variables se relacionan más con Y? ¿la relación entre A y B es positiva o negativa?
+Agregaciones: ¿qué categoría tiene el promedio más alto de X? ¿hay diferencias entre grupos?
+Yo puedo proponerte de 3 a 5 preguntas concretas cuando vea tus columnas, para que no queden genéricas. Tú las revisas y me dices cuáles te gustan o cuáles cambiarías.
+Para eso solo me falta que subas el Excel. Si no recuerdas bien de dónde lo sacaste, no pasa nada, lo vemos después con el archivo a la vista.
+oye teggo unos demos que han sido de cogigos que hemos usado los quieres ver como para tener una idea de que puedes usar o no
+Sí, súbelos. Me sirven para ver qué librerías usan en clase (pandas, matplotlib, seaborn, etc.), qué estilo de código esperan y cómo comentan o explican las celdas. Así el notebook queda parecido a lo que ya vieron y no con cosas que el profe no reconozca.
+Puedes subir los demos como .ipynb, .py o incluso un PDF, lo que tengas a mano. Cuando subas también el Excel, con todo eso armo el notebook.
+demo (4).ipynb
+IPYNB
+demo (3).ipynb
+IPYNB
+demo (2).ipynb
+IPYNB
+demo (1).ipynb
+IPYNB
+estos son los demos ya te paso el excel
+
+Ya revisé los cuatro demos (clases 2, 4, 5 y 6). Así quedaría el notebook para que se parezca a lo que ya vieron en clase:
+
+Librerías: pandas, numpy, matplotlib y seaborn, con el mismo estilo que usan ellos (seaborn-v0_8-whitegrid).
+Primera celda: una tabla con qué mide el dataset, quién lo publica, la URL, el tamaño y la granularidad (qué representa una fila). Eso cubre lo de "procedencia y URL declaradas".
+Limpieza: hago primero el diagnóstico (shape, dtypes, isnull().sum(), describe()) y después decido con el marco de nulos del demo: menos de 5% se eliminan las filas, entre 5% y 50% se rellena (con mediana), más de 50% se considera eliminar la columna. Cada decisión lleva su justificación escrita, y al final va un antes y después con df_original.
+Univariado: el marco de 5 pasos (identificar, resumir, dispersión, visualizar, outliers con 1.5×IQR), con histograma y boxplot de las variables clave.
+Bivariado: scatter con alpha, correlación, heatmap con center=0, vmin=-1, vmax=1, annot=True, y boxplots de categórica contra numérica.
+Agregaciones: groupby con .agg(['mean', 'count']) y .sort_values(). El demo insiste en poner siempre el conteo al lado del promedio.
+Gráficos: todos con título y etiquetas en los dos ejes, porque el demo dice que las rúbricas lo piden.
+Conclusiones: respuestas a las preguntas de investigación, con las cautelas que enseñan (correlación no es causalidad, el chequeo de Simpson, etc.).
+Como tu archivo es Excel, voy a usar pd.read_excel() en vez de read_csv(). Si es .xlsx necesita la librería openpyxl; si te da error al cargarlo, se instala con pip install openpyxl.
+Cuando subas el Excel reviso que cumpla el mínimo de 10.000 filas y 7 columnas y propongo las preguntas de investigación. Además del archivo, dime de dónde lo descargaste (nombre y URL) para la primera celda.
+oye pero hagamnos todo paso a paso para yo ir viendo el codigo entenerlo y me ayudas a entener el analisis que eso es lo que mas nos van a oregunatar sonre analisis que hice y las decisiones que tomeMe parece mejor así, porque en la sustentación te van a preguntar por tus decisiones y no por el código. Vamos por partes y no avanzamos a la siguiente hasta que la entiendas. En cada parte hago lo siguiente:
+
+Te doy el código de esa sección, corto y con comentarios.
+Te explico qué hace y qué salió, en palabras simples.
+Te dejo decidir a ti: qué hacer con los nulos, si los outliers se quedan o no, cuál correlación vale la pena. Yo te propongo y te explico el porqué, pero la decisión y su justificación quedan tuyas.
+Te preparo para preguntas: al cerrar cada parte te dejo 2 o 3 preguntas que el profe podría hacerte, con la respuesta.
+El orden sería este:
+
+Cargar el dataset y la primera celda (procedencia y URL)
+Inspección y diagnóstico
+Limpieza (nulos, tipos, duplicados, inconsistencias)
+Univariado (histograma y boxplot)
+Bivariado (heatmap y scatter)
+Agregaciones con groupby
+Conclusiones
+Al final armo todo en un solo .ipynb, que es el entregable.
+Para empezar me falta el Excel. Súbelo aquí y arrancamos con el paso 1. Si no recuerdas de dónde lo sacaste, no pasa nada: con el archivo a la vista te ayudo a averiguarlo.
+Trafico_Portuario_Marítimo_En_Colombia_20260511.xlsx
+XLSX
+ese es no tiene exactos 10mil pero son 9300 sirve igual ademas tiene mas de 7 columnas o filas se me olvida cual es cual
+Voy a abrirlo y verificar el tamaño real antes de decirte nada.
+
+Ya lo abrí. Empiezo por lo del tamaño, porque afecta lo que sigue.
+Filas y columnas: las filas son las líneas horizontales (cada registro) y las columnas son las verticales (cada variable). Tu archivo tiene 9.310 filas y 14 columnas. Las columnas sobran (el mínimo es 7), pero la rúbrica pide mínimo 10.000 filas, y con 9.310 faltan 690. No te diría que "sirve igual". Es un requisito escrito y un profe estricto podría restarte por eso. Tienes tres caminos:
+
+Preguntarle al profe si 9.310 es aceptable. Es lo más rápido y no cuesta nada.
+Volver a descargar el dataset, por si el portal ya publicó meses nuevos. Tendrían que ser unos 7 meses más, así que no es seguro.
+Cambiar de dataset, si el profe dice que no.
+De dónde sale (para la primera celda): es "Tráfico Portuario Marítimo en Colombia", publicado en datos.gov.co. Consolida las toneladas y el tipo de carga movilizada por sociedad portuaria en cada zona portuaria del país, y los datos van desde el 1 de enero de 2018. La entidad que lo publica es la Superintendencia de Transporte. La URL es:
+https://www.datos.gov.co/Transporte/Trafico-Portuario-Mar-timo-En-Colombia/5r3g-zv5z datosdatos
+Qué tiene adentro:
+
+4 columnas de texto: zona portuaria (12 valores), sociedad portuaria (59), tipo de servicio (público o privado) y tipo de carga (5).
+8 columnas numéricas, una por tipo de tráfico: exportación, importación, transbordo, tránsito internacional, fluvial, cabotaje, movilizaciones a bordo y transitoria.
+Año (2018 a 2026) y mes.
+Una fila parece ser una sociedad portuaria con un tipo de carga en un mes y año. Lo confirmamos en el paso 1.
+Lo que ya veo para la limpieza:
+
+Nulos: cero, y duplicados: cero. Que no haya nulos no es un problema, pero en la limpieza tienes que dejarlo escrito, porque la rúbrica pide justificar cómo trataste los nulos.
+Caracteres dañados: IMPORTACIÃ“N, AÃ‘O VIGENCIA y COMPAï¿½IA DE PUERTOS ASOCIADOS. Es un problema de codificación que hay que arreglar.
+Espacios sobrantes en el nombre de la columna ZONA PORTUARIA.
+Muchísimos ceros: la mediana de exportación es 0, y hay 54 filas con las 8 columnas en 0. Esto va a dar una decisión interesante que tendrás que justificar.
+Una pregunta para avanzar: ¿le escribes al profe por lo de las 10.000 filas o seguimos mientras tanto con el paso 1? Yo seguiría, porque el paso 1 sirve igual con cualquier dataset que termines usando.de que otra cosas podira sacar datos si no sirve ese
+Buscando fuentes alternativas de conjuntos de datos.
+Buscando fuentes alternativas de conjuntos de datos.
+Hay varias fuentes que sirven, y como necesitas un dataset real con URL, todas cumplen.
+Dónde buscar
+datos.gov.co: la misma fuente que ya usaste, y es lo más natural para un trabajo en Colombia. Cada dataset muestra cuántas filas y columnas tiene antes de descargarlo, y se exporta a CSV o Excel.
+Kaggle (kaggle.com/datasets): hay miles, con filtros por tamaño y tema.
+Repositorio UCI (archive.ics.uci.edu), Banco Mundial (data.worldbank.org), Our World in Data y DANE: más serios y más limpios.
+Google Dataset Search (datasetsearch.research.google.com): un buscador que junta todos los anteriores.
+Temas que suelen tener muchas filas
+Accidentes de tránsito, delitos (hurtos, homicidios) o casos de COVID-19 en datos.gov.co.
+Resultados de las pruebas Saber 11 del ICFES.
+Contratos públicos (SECOP).
+Calidad del aire o servicios públicos.
+En Kaggle: precios de carros usados, alojamientos de Airbnb, canciones de Spotify, ventas de videojuegos o rendimiento de estudiantes.
+Qué revisar antes de elegir
+Que tenga 10.000 filas o más y 7 columnas o más. Ojo con los que quedan justo al borde, como te pasó ahora.
+Que mezcle columnas numéricas y de texto. Sin numéricas no hay histogramas ni correlación, y sin categóricas no hay groupby.
+Que tenga algo de suciedad (nulos, tipos mal guardados, texto inconsistente), porque la rúbrica pide limpieza visible.
+Que no sea uno de los datasets de los demos (Empocaldas, educación, estados financieros). El profe ya los conoce.
+Por ahora tu dataset de puertos sigue siendo una opción decente, y solo dependería de lo que responda el profe.
+¿Qué temas te interesan (deportes, salud, música, economía, transporte...)? Con eso busco candidatos concretos y te verifico cuántas filas y columnas tienen antes de que te comprometas con uno.
+110k filas es mucho verdad
+Assessing whether the dataset size poses practical limits.
+Assessing whether the dataset size poses practical limits.
+No, para pandas 110.000 filas es poco. En los demos ya lo dicen: en un portátil normal aguanta unos pocos millones sin quejarse. Y Excel tampoco tiene problema, porque su límite es de más de un millón de filas.
+Lo único que cambia con ese tamaño es esto:
+Cargar el archivo: un .xlsx de 110k filas puede tardar entre 20 y 60 segundos en pd.read_excel(). Si lo tienes en CSV carga casi al instante, así que conviene descargarlo como CSV si la fuente lo permite.
+Los scatter plots: con 110k puntos se ve una mancha. Se arregla igual que en los demos: usas alpha bajito o dibujas sobre una muestra con df.sample(2000, random_state=42).
+Los pair plots: siempre sobre una muestra, nunca sobre todo el dataset.
+Los histogramas, boxplots, groupby y la matriz de correlación los calcula todo el dataset sin problema y en segundos.
+Tener más filas también te sirve, porque los promedios por grupo quedan más confiables. Solo ten en cuenta que el profe no va a valorar que sea grande, sino que lo entiendas y justifiques tus decisiones.
+¿Ya tienes un dataset de 110k en mente o lo estás evaluando? Si me pasas el nombre o el enlace, lo reviso y te confirmo que tenga las columnas numéricas y de texto que necesitas.
+Listado de IPS en Colombia según su nivel de complejidad 11,5k y 27 o Resultados de los sorteos loterías 110k y 8 cual es mejor
+Weighing each dataset's columns for meaningful analysis.
+Voy a mirar las columnas de los dos en datos.gov.co antes de opinar.
+Se buscó en la web
+No pude ver las columnas de ninguno de los dos, la búsqueda solo devolvió la ficha general. Por eso no te voy a decir cuál es mejor a ciegas. Lo que decide no son las filas, sino cuántas columnas numéricas tienen que sean cantidades de verdad (toneladas, precios, camas, edades). Sin eso, dos partes de la rúbrica se quedan flojas: el heatmap con los scatter plots y los histogramas con boxplots. Los códigos, teléfonos, NIT y números de fila son números, pero no cuentan como cantidades. El demo de la clase 6 lo advierte.
+IPS (11,5k filas, 27 columnas)
+A favor: 27 columnas dan mucho de dónde escoger. Un listado así suele tener departamento, municipio, nivel de complejidad y naturaleza jurídica, que son ideales para groupby. Además suele traer texto sucio, que te da material para la limpieza visible.
+En contra: los listados de IPS suelen ser casi todo texto. Si solo hay una o dos columnas de cantidades, la parte de correlación queda pobre.
+Detalle: 11,5k está cerca del mínimo de 10.000, pero lo cumple.
+Loterías (110k filas, 8 columnas)
+A favor: mucho volumen y el mínimo de columnas cumplido.
+En contra: 8 columnas dejan poco para cruzar. Y el número ganador y la serie de una lotería son aleatorios por diseño, así que su correlación va a ser casi cero. Puedes decir "no hay relación", pero es un hallazgo delgado para una sustentación. El valor del premio sí sería una cantidad real, si viene en el dataset.
+Mi lectura es que el de IPS tiene más margen para armar un análisis completo, siempre que traiga al menos 3 columnas de cantidades reales. Pero eso lo confirma el archivo, no yo.
+Descarga los dos en Excel o CSV y súbeme el que prefieras, o los dos. Con df.dtypes y las primeras filas te confirmo en un minuto cuál sirve y cuáles serían tus preguntas de investigación.
+
+Los revisé y ninguno es perfecto. Para la rúbrica el orden que te recomiendo es este: primero puertos (si el profe acepta las 9.310 filas), después IPS y, en último lugar, loterías.
+Loterías (110.037 filas × 8 columnas): la descartaría.
+
+No tiene nulos, pero el año viene como 2.020 (con punto de miles) y pandas lo leyó como 2,02. Es la misma trampa de la clase 5, y sirve para la limpieza.
+Hay 6 duplicados y unos pocos valores raros: 7 billetes ganadores mayores a 9.999 y una serie mayor a 999.
+Lo grave está en las variables. El número de billete y la serie son etiquetas al azar, no cantidades, y no hay ninguna columna con el valor del premio. El heatmap sería de año, mes y número de sorteo contra el número ganador, y eso no dice nada. Los 110k son mucho volumen sin mucho análisis posible.
+IPS (11.466 filas × 27 columnas): sirve, pero con trabajo.
+
+La limpieza sería muy visible. nivel y caracter están vacías en el 91% de las filas (el nivel de complejidad casi no viene), tido_codigo y gerente están 100% vacías, y ese tiene el 69% de nulos. Eso encaja con el marco de nulos del demo de la clase 4. Las fechas vienen como enteros (20030409) y hay que convertirlas.
+Los groupby funcionarían bien: 37 departamentos, privada contra pública (10.446 frente a 1.002) y los niveles 1, 2 y 3.
+El problema es el bivariado. Casi todas las columnas numéricas son códigos (NIT, código de habilitación), así que no sirven para correlacionar. Habría que crear tus propias variables a partir de las fechas, como la antigüedad de la IPS o el tiempo que le queda de vigencia. Se puede hacer y se puede justificar, pero da un heatmap chico.
+Ojo: la fecha de corte del REPS es de junio de 2022, o sea que los datos son de esa época.
+Puertos (9.310 filas × 14 columnas): el mejor analíticamente. Tiene 8 columnas de toneladas, que son cantidades reales. Da histogramas, boxplots, un heatmap y scatter plots con sentido, y groupby por zona, tipo de carga y año. Su único problema es que faltan 690 filas para llegar a 10.000.
+Por eso la pregunta al profe vale la pena. Si acepta las 9.310, ese es el dataset. Si no, sigo con IPS y armamos las variables derivadas.
+¿Le escribes al profe hoy? Mientras responde puedo avanzar con el paso 1 con el dataset de puertos, que sirve de práctica para cualquiera de los dos.
+Colombianos_detenidos_en_el_exterior_20260928.csv
+CSV
+y ese
+
+Este es el que mejor cumple la rúbrica en tamaño y en limpieza. Tiene 388.148 filas × 12 columnas, así que pasa de sobra el mínimo de 10.000 filas. Y esa es su ventaja frente a puertos, que quedó corto.
+Para la limpieza visible es el mejor de los que llevamos.
+
+Categorías duplicadas por codificación dañada: NARCOTR�FICO (61.954 filas) y NARCOTRÁFICO (29.439) son el mismo delito escrito distinto. Pasa igual con EN INVESTIGACI�N y EN INVESTIGACIÓN. Es el ranking falso del demo de la clase 4.
+Nulos disfrazados: DESCONOCIDO aparece en 230.170 filas de PAIS PRISIÓN (59%) y en 365.621 de EXTRADITADO Y O REPATRIADO. No cuentan como nulos para pandas, pero lo son.
+Nulos reales: UBICACIÓN PAÍS está vacía en el 69% de las filas y repite lo que ya dicen latitud y longitud. Esas dos columnas tienen 52.728 nulos.
+Tipos mal guardados: latitud y longitud vienen como texto con coma decimal (-1,831239), y la fecha también viene como texto.
+Valores inválidos: 25.995 filas tienen coordenadas (0.0, 0.0), que es un valor por defecto y no un lugar real.
+Duplicados: hay 32.598. Aquí toca decidir con la pregunta del demo: ¿qué representa una fila? Como cada fila trae una CANTIDAD, dos filas iguales pueden ser una copia o dos grupos distintos, y esa decisión la justificas tú.
+Para groupby también funciona. Tiene 93 países, 121 consulados, 40 delitos, género, edad y situación jurídica. Hay una trampa parecida a la de la clase 5: CANTIDAD dice cuántas personas hay en cada fila. Contar filas no es contar personas, y para eso tienes que sumar CANTIDAD.
+Su punto débil es el bivariado. Solo hay una columna numérica de verdad, CANTIDAD. Tiene mediana 1 y máximo 460, así que es muy sesgada y para el histograma habría que usar escala logarítmica. Un heatmap con una sola variable no existe. Para tenerlo tendrías que agrupar por país y año y crear variables como total de detenidos, porcentaje de condenados o número de delitos distintos. Se puede justificar, pero es trabajo extra que tienes que declarar.
+Ojo con las fechas: el 24 de enero de 2022 concentra 32.406 filas. Parecen cargas masivas, así que antes de hablar de "tendencia en el tiempo" habría que revisarlo.
+Sobre cuál elegir, puertos sigue siendo el mejor para correlaciones, pero con el riesgo de las 9.310 filas. Este es la opción segura si quieres cumplir el mínimo sin depender de lo que diga el profe. Además, las preguntas salen solas: ¿en qué países hay más colombianos detenidos y por qué delitos?, ¿cambió eso con los años?, ¿hay diferencias por género en el delito o en la situación jurídica?
+Para la primera celda también tengo que verificar quién publica este dataset y su URL exacta.
+¿Elegimos este y arrancamos con el paso 1, o prefieres esperar lo que responda el profe sobre puertos?
+usemos este ya fue esta es la url https://www.datos.gov.co/Estad-sticas-Nacionales/Colombianos-detenidos-en-el-exterior/e97j-vuf7/about_data
+
+Ya tengo lo que necesito para el paso 1. La URL que me diste abre la ficha de datos.gov.co, pero no muestra quién publica. Por eso lo cotejé en otra fuente: la Cancillería lista "Colombianos detenidos en el exterior" entre sus conjuntos de datos de servicio al ciudadano en datos.gov.co. La fuente es el Ministerio de Relaciones Exteriores (Cancillería). cancilleria
+
+Paso 1: cargar el dataset y declarar su procedencia
+Son 4 celdas. En la primera, en Markdown, va la procedencia, que es lo que pide la rúbrica.
+Celda 1 (Markdown):
+
+markdown
+
+# Análisis exploratorio: Colombianos detenidos en el exterior| Campo | Valor ||-------|-------|| Fuente | Ministerio de Relaciones Exteriores (Cancillería), vía datos.gov.co || URL | https://www.datos.gov.co/Estad-sticas-Nacionales/Colombianos-detenidos-en-el-exterior/e97j-vuf7/about_data || Fecha de descarga | 28 de septiembre de 2026 || Tamaño | 388.148 filas x 12 columnas || Cobertura | 17/09/2018 a 01/11/2025, 64 fechas de publicación || Granularidad | (la completamos abajo, al entenderla) |
+Celda 2 (librerías y estilo, igual que en los demos):
+
+python
+
+import pandas as pdimport numpy as npimport matplotlib.pyplot as pltimport seaborn as snspd.set_option('display.max_columns', None)pd.set_option('display.float_format', '{:,.2f}'.format)plt.style.use('seaborn-v0_8-whitegrid')plt.rcParams['figure.figsize'] = (12, 5)
+Celda 3 (carga):
+
+python
+
+# low_memory=False evita el DtypeWarning: el archivo es grande y pandas# adivinaría tipos por pedazos. Así lo lee completo antes de decidir.df = pd.read_csv('Colombianos_detenidos_en_el_exterior_20260928.csv', low_memory=False)df_original = df.copy()   # copia intacta para comparar "antes y después" al finalprint("Filas:", df.shape[0])print("Columnas:", df.shape[1])
+Celda 4 (¿qué representa una fila?):
+
+python
+
+fechas = pd.to_datetime(df['FECHA PUBLICACIÓN'])print("Primera publicación:", fechas.min().date())print("Última publicación: ", fechas.max().date())print("Fechas distintas:   ", fechas.nunique())por_fecha = df.groupby('FECHA PUBLICACIÓN')['CANTIDAD'].agg(personas='sum', filas='size')print()print(por_fecha.head(3))print(por_fecha.tail(3))print()print("Suma de CANTIDAD en TODAS las fechas:", f"{df['CANTIDAD'].sum():,}")print("Suma de CANTIDAD en la última fecha: ", f"{por_fecha['personas'].iloc[-1]:,}")
+Qué sale y qué significa
+Corrí esto y salió lo siguiente:
+
+388.148 filas y 12 columnas.
+64 fechas de publicación, entre el 17/09/2018 y el 01/11/2025.
+Cada fecha trae unas 5.000 a 6.000 filas que suman entre 23.000 y 28.000 personas. Por ejemplo, el 01/11/2025 son 6.117 filas y 27.586 personas.
+Sin embargo, sumar CANTIDAD en todo el dataset da 1.862.305.
+Esa diferencia es el hallazgo del paso. Cada publicación es una foto de cuántos colombianos estaban detenidos en ese momento, no una lista de casos nuevos. Las mismas personas aparecen en fotos distintas, así que sumar todo cuenta a la misma gente muchas veces. 1,86 millones no son personas distintas. Si escribes esa cifra en las conclusiones, el profe te la puede tumbar en una pregunta.
+Además, dos fechas se salen del patrón: el 24/01/2022 tiene 32.406 filas y el 04/01/2023 suma unas 55.800 personas. Parecen cargas de varias fotos juntas bajo una misma fecha. Esto lo retomamos en el paso 3, porque probablemente explique parte de los 32.598 duplicados.
+
+Tu decisión (y tiene que ser tuya)
+Yo propongo esta regla:
+
+Para preguntas del tipo "¿cuántos hay?" o "¿en qué países?", usar solo la última fecha, que es la foto más reciente.
+Para preguntas del tipo "¿cómo cambió?", usar todas las fechas, pero comparando el total de cada foto, nunca sumándolas.
+Con esa regla completas la fila "Granularidad" de la celda 1 con algo como: "Cada fila es un grupo de personas (CANTIDAD) con las mismas características, dentro de una foto publicada en una fecha."
+
+Preguntas que te podría hacer el profe
+¿Por qué no sumaste toda la columna CANTIDAD? Porque cada fecha es una foto del mismo universo de detenidos, y sumarlas cuenta varias veces a las mismas personas.
+¿Qué representa una fila? Un grupo de personas con las mismas características (país, delito, género, edad, situación jurídica) en una fecha de publicación. No es una persona.
+¿Por qué es real este dataset? Lo publica la Cancillería en datos.gov.co, con URL y fecha de descarga declaradas.
+¿Te corrió el código y te salieron los mismos números? Si sí, pasamos al paso 2, la inspección y el diagnóstico, donde revisamos tipos, nulos, DESCONOCIDO y los caracteres dañados antes de tocar nada.espera antes que todo se me olvido donde corro todo en visual studio ? hay se a trabajdo
+La forma más fácil es hacerlo desde el explorador de archivos, como con cualquier carpeta:
+En Windows:
+Abre el Explorador de archivos y ve a donde quieras guardar el trabajo (Documentos o Escritorio, por ejemplo).
+Clic derecho en un espacio vacío > Nuevo > Carpeta.
+Ponle un nombre sin espacios ni tildes, como trabajo_eda.
+Mueve adentro el CSV Colombianos_detenidos_en_el_exterior_20260928.csv. Suele estar en Descargas, así que arrástralo o cópialo y pégalo en la carpeta nueva.
+En Mac: es igual, pero con Finder. Clic derecho > Nueva carpeta.
+Desde VS Code, también se puede: en File > Open Folder aparece un botón "Nueva carpeta" (o "Make New Folder" en Mac) en la ventana que se abre. Creas la carpeta ahí mismo y la abres.
+Después abre esa carpeta con File > Open Folder en VS Code. A la izquierda, en el panel del explorador, deberías ver el CSV adentro. Si lo ves, ya está bien puesto. Ahí mismo creas el notebook con File > New File > Jupyter Notebook, y lo guardas en la misma carpeta.
+Los nombres sin espacios ni tildes evitan errores raros con las rutas.
+¿Estás en Windows o en Mac? Si el paso de abrir la carpeta te da problemas, dime qué ves y te guío.
+bien listo entonces esas 4 celdad que me diste las pongo cada una en una markdown ?
+No, solo la celda 1 es Markdown. Las otras tres son de código (Python):
+CeldaTipoContenido1MarkdownLa tabla con la procedencia y la URL2CódigoImports y estilo3CódigoCarga del CSV4CódigoFechas y suma de CANTIDAD
+Cómo hacerlo en VS Code:
+En el notebook, pasa el mouse por debajo de una celda y aparecen los botones + Code y + Markdown. Con esos agregas cada tipo.
+La primera celda que pegues, la de la tabla, agrégala con + Markdown. Para que se vea con formato (la tabla y el título), presiona Shift+Enter o el check que aparece arriba de la celda.
+Las otras tres agrégalas con + Code, pega el código y ejecuta cada una con Shift+Enter.
+Ojo: ejecuta las celdas en orden (2, 3, 4). La celda 3 usa pd, que se define en la 2, y la celda 4 usa df, que se crea en la 3. Si las corres desordenadas te sale un NameError.
+Lo que deberías ver al correr las celdas de código:
+Celda 2: no imprime nada, y eso es normal.
+Celda 3: imprime Filas: 388148 y Columnas: 12.
+Celda 4: imprime las fechas, la tablita por fecha y las dos sumas (1.862.305 y 27.586).
+Si te salen esos números, todo quedó bien. Si te sale algún error, cópiame el mensaje completo y lo revisamos.
+si salio bien. Primera publicación: 2018-09-17
+Última publicación:  2025-11-01
+Fechas distintas:    64
+                   personas  filas
+FECHA PUBLICACIÓN                 
+2018-09-17            23284   4845
+2019-01-01            24232   4997
+2019-07-04            25307   5206
+                   personas  filas
+FECHA PUBLICACIÓN                 
+2025-09-01            27911   6124
+2025-10-01            27804   6115
+2025-11-01            27586   6117
+Suma de CANTIDAD en TODAS las fechas: 1,862,305
+Suma de CANTIDAD en la última fecha:  27,586
+Perfecto, los números coinciden con los míos. Antes de darte el paso 2 lo corro yo para pasarte los resultados reales.
+Se ejecutaron 2 comandos
+Corrí todo esto yo primero para pasarte lo que debería salir. Este paso es solo de diagnóstico: no arreglamos nada todavía. Primero miramos qué está mal, y las decisiones van en el paso 3.
+
+Paso 2: inspección y diagnóstico
+Son 4 celdas de código, y las corres en orden.
+Celda 5 (estructura):
+
+python
+df.info()df.head(3).T   # .T gira la tabla: cada columna queda como fila y se lee mejor
+Celda 6 (nulos, duplicados y DESCONOCIDO):
+
+python
+# Nulos que pandas sí venulos = df.isnull().sum()pct = (nulos / len(df) * 100).round(1)print(pd.DataFrame({'nulos': nulos, '%': pct})[nulos > 0])# Duplicados exactosprint("\nDuplicados:", df.duplicated().sum())# Nulos disfrazados: pandas NO los cuenta, pero lo sonprint("\n'DESCONOCIDO' por columna:")for col in df.select_dtypes(exclude='number').columns:    k = (df[col].astype(str).str.strip().str.upper() == 'DESCONOCIDO').sum()    if k > 0:        print(f"  {col}: {k:,} ({k/len(df)*100:.1f}%)")
+Celda 7 (categorías cortas):
+
+python
+for col in ['EXTRADITADO Y O REPATRIADO', 'SITUACIÓN JURÍDICA', 'GÉNERO', 'GRUPO EDAD']:    print(f"\n{col}")    print(df[col].value_counts())
+Celda 8 (la única numérica):
+
+python
+df['CANTIDAD'].describe()
+Si tu pandas dice object donde yo veo str en df.info(), es solo diferencia de versión y no importa.
+Qué debe salir y qué significa
+HallazgoNúmeroPor qué importaNulos realesUBICACIÓN PAÍS 68,6%, LATITUD y LONGITUD 13,6%La primera pasa el 50%, así que por el marco de nulos del demo se considera eliminar la columna.Duplicados exactos32.598 (8,4%)Toca decidir si son copias o grupos legítimos.Nulos disfrazadosEXTRADITADO 94,2%, PAIS PRISIÓN 59,3%, GRUPO EDAD 29,7%, DELITO 10,0%Para pandas no son nulos, pero lo son. Es la trampa del demo de la clase 4.Categorías repetidasEN INVESTIGACI�N (97.306) y EN INVESTIGACIÓN (44.378); EN ESPERA DE DEPORTACI�N (10.171) y EN ESPERA DE DEPORTACIÓN (4.047)Son la misma categoría escrita distinta. Sin unirlas, cualquier groupby te da un ranking falso.Género con 5 valoresMasculino, Femenino, Otro, DESCONOCIDO y NO_BINARIOLos dos últimos son muy chicos (267 y 21 filas). Hay que decidir qué hacer con ellos.CANTIDAD sesgadaMediana 1, promedio 4,8, máximo 460Un promedio de 4,8 engaña cuando la mitad de las filas vale 1. Por eso el histograma va a necesitar escala logarítmica.
+Un detalle sobre lo de �: ese símbolo ya viene dañado en el archivo de origen. No se arregla cambiando la codificación al cargarlo, hay que reemplazarlo a mano. Eso lo hacemos en el paso 3.
+Preguntas que te podría hacer el profe
+¿Qué diferencia hay entre un nulo y un DESCONOCIDO? Para pandas, un nulo es NaN. DESCONOCIDO es un texto normal, y por eso isnull() no lo ve. Hay que buscarlo a propósito.
+¿Por qué la mediana de CANTIDAD es 1 y el máximo 460? Porque la mayoría de las filas son casos individuales y unas pocas agrupan cientos de personas. Los datos están muy concentrados en valores bajos, con una cola larga hacia arriba.
+¿Por qué no basta con ver isnull().sum()? Porque solo cuenta los nulos "de verdad", y aquí los más grandes son textos que dicen DESCONOCIDO.
+Corre las 4 celdas y dime si te salen los mismos números, sobre todo los 32.598 duplicados y los porcentajes de DESCONOCIDO. Si coinciden, pasamos al paso 3 (limpieza) y ahí empiezas a tomar las decisiones. esto es una parte ya te mando el resto
+
+<class 'pandas.DataFrame'>
+RangeIndex: 388148 entries, 0 to 388147
+Data columns (total 12 columns):
+ #   Column                      Non-Null Count   Dtype
+---  ------                      --------------   -----
+ 0   FECHA PUBLICACIÓN           388148 non-null  str  
+ 1   PAIS PRISIÓN                388148 non-null  str  
+ 2   CONSULADO                   388148 non-null  str  
+ 3   DELITO                      388148 non-null  str  
+ 4   EXTRADITADO Y O REPATRIADO  388148 non-null  str  
+ 5   SITUACIÓN JURÍDICA          388148 non-null  str  
+ 6   GÉNERO                      388148 non-null  str  
+ 7   GRUPO EDAD                  388148 non-null  str  
+ 8   UBICACIÓN PAÍS              121827 non-null  str  
+ 9   CANTIDAD                    388148 non-null  int64
+ 10  LATITUD                     335420 non-null  str  
+ 11  LONGITUD                    335420 non-null  str  
+dtypes: int64(1), str(11)
+memory usage: 76.5 MB
+Comparing dataframe memory usage discrepancies between outputs.
+Comparing dataframe memory usage discrepancies between outputs.
+Esa es la salida de df.info() (celda 5) y coincide con la mía. Solo cambia el memory usage (76,5 MB contra 35,5 MB en el mío), que depende de tu versión de pandas y no afecta nada.
+Cómo se lee esa salida (te sirve para la sustentación):
+Non-Null Count dice cuántos valores no nulos tiene cada columna, de un total de 388.148. Donde el número es menor, hay nulos. UBICACIÓN PAÍS tiene 121.827 (le faltan 266.321) y LATITUD y LONGITUD tienen 335.420 (les faltan 52.728). Todas las demás columnas dicen 388.148, o sea que "no tienen nulos", aunque ya sabemos que varias esconden DESCONOCIDO.
+Dtype dice cómo guardó pandas cada columna, y aquí hay tres problemas:FECHA PUBLICACIÓN es texto (str). Para hacer series de tiempo hay que pasarla a fecha.
+LATITUD y LONGITUD también son texto. Vienen con coma decimal (-1,831239), así que pandas no las reconoce como números.
+CANTIDAD es la única numérica (int64). Eso pesa en el bivariado, como hablamos.
+Esos tres tipos mal guardados van a la lista de cosas por arreglar en el paso 3.
+Falta lo de las celdas 6, 7 y 8, que son las importantes. ¿Las corriste? Si sí, pégame lo que te salió. Necesito ver sobre todo que te dé 32.598 duplicados y los porcentajes de DESCONOCIDO (94,2% en EXTRADITADO, 59,3% en PAIS PRISIÓN). Si coincide, pasamos al paso 3.
+etsaba tambei n esta tabla     0    1    2
+FECHA PUBLICACIÓN    2018-09-17    2018-09-17    2018-09-17
+PAIS PRISIÓN    ECUADOR    ITALIA    ESTADOS UNIDOS
+CONSULADO    C. QUITO    C. ROMA    C. NUEVA YORK
+DELITO    NARCOTRÁFICO    OTROS    EXTORSIÓN
+EXTRADITADO Y O REPATRIADO    DESCONOCIDO    DESCONOCIDO    DESCONOCIDO
+SITUACIÓN JURÍDICA    EN JUICIO    EN INVESTIGACIÓN    CONDENADO
+GÉNERO    MASCULINO    MASCULINO    MASCULINO
+GRUPO EDAD    DESCONOCIDO    DESCONOCIDO    ADULTO
+UBICACIÓN PAÍS    (-1.831239, -78.183406)    (41.87194, 12.56738)    (37.09024, -95.712891)
+CANTIDAD    45    1    1
+LATITUD    -1,831239    41,87194    37,09024
+LONGITUD    -78,183406    12,56738    -95,712891
+aqui lo del otro                  nulos     %
+UBICACIÓN PAÍS  266321 68.60
+LATITUD          52728 13.60
+LONGITUD         52728 13.60
+Duplicados: 32598
+'DESCONOCIDO' por columna:
+  PAIS PRISIÓN: 230,170 (59.3%)
+  DELITO: 38,984 (10.0%)
+  EXTRADITADO Y O REPATRIADO: 365,621 (94.2%)
+  GÉNERO: 267 (0.1%)
+  GRUPO EDAD: 115,356 (29.7%) esto del otro EXTRADITADO Y O REPATRIADO
+EXTRADITADO Y O REPATRIADO
+DESCONOCIDO                  365621
+EXTRADICION                   21833
+REPATRIACION                    585
+EXTRADICION, REPATRIACION       109
+Name: count, dtype: int64
+SITUACIÓN JURÍDICA
+SITUACIÓN JURÍDICA
+CONDENADO                                163103
+EN INVESTIGACI�N                          97306
+EN JUICIO                                 55427
+EN INVESTIGACIÓN                          44378
+NO REPORTA - CONFIDENCIALIDAD ESTATAL     12403
+EN ESPERA DE DEPORTACI�N                  10171
+EN ESPERA DE DEPORTACIÓN                   4047
+EXTRADITADO                                1313
+Name: count, dtype: int64
+GÉNERO
+GÉNERO
+MASCULINO      305646
+FEMENINO        81804
+...
+PRIMERA INFANCIA      1548
+ADOLESCENTE           1061
+INFANTE               1004
+Name: count, dtype: int64 
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings... y este el ultimo count   388,148.00
+mean          4.80
+std          16.87
+min           1.00
+25%           1.00
+50%           1.00
+75%           3.00
+max         460.00
+Name: CANTIDAD, dtype: float64
+Verificando la limpieza antes de avanzar al siguiente paso.
+Verificando la limpieza antes de avanzar al siguiente paso.
+Coincide todo: los 32.598 duplicados, los porcentajes de DESCONOCIDO, las categorías dañadas y el describe(). El paso 2 quedó listo. Antes del paso 3 reviso cuántas columnas tienen el carácter dañado �, para no darte un arreglo a medias.
+Se ejecutaron 2 comandos
+Ya cerramos el paso 2. Ahora viene el paso 3, la limpieza. Lo parto en dos partes para que lo puedas digerir. Esta primera es la 3a: texto dañado y tipos de datos. La 3b (nulos, DESCONOCIDO y duplicados) es donde están las decisiones más difíciles.
+Todo lo que te pongo lo probé antes de dártelo.
+Paso 3a: arreglar el texto y los tipos
+Celda 9: ubicar el daño
+
+python
+# '\ufffd' es el carácter de reemplazo: aparece cuando el archivo original perdió una tilde o una Ñfor col in df.select_dtypes(exclude='number').columns:    malos = df[col].str.contains('\ufffd', na=False)    if malos.any():        print(f"\n{col}: {malos.sum():,} filas afectadas")        print(df.loc[malos, col].value_counts())
+Celda 10: arreglarlo con un diccionario
+
+python
+arreglos = {    'ESPA�A': 'ESPAÑA', 'CURA�AO': 'CURAÇAO', 'C. PUERTO ESPA�A': 'C. PUERTO ESPAÑA',    'NARCOTR�FICO': 'NARCOTRÁFICO', 'EXTORSI�N': 'EXTORSIÓN',    'NO REPORTA � CONFIDENCIALIDAD ESTATAL': 'NO REPORTA - CONFIDENCIALIDAD ESTATAL',    'CONDUCCI�N TEMERARIA': 'CONDUCCIÓN TEMERARIA', 'DA�OS': 'DAÑOS',    'FALSIFICACI�N': 'FALSIFICACIÓN', 'DELITOS POL�TICOS': 'DELITOS POLÍTICOS',    'COACCI�N': 'COACCIÓN', 'CELEBRACI�N INDEBIDA DE CONTRATOS': 'CELEBRACIÓN INDEBIDA DE CONTRATOS',    'EN INVESTIGACI�N': 'EN INVESTIGACIÓN', 'EN ESPERA DE DEPORTACI�N': 'EN ESPERA DE DEPORTACIÓN',}cols_texto = ['PAIS PRISIÓN', 'CONSULADO', 'DELITO', 'SITUACIÓN JURÍDICA']antes = {c: df[c].nunique() for c in cols_texto}df[cols_texto] = df[cols_texto].replace(arreglos)for c in cols_texto:    print(f"{c}: {antes[c]} -> {df[c].nunique()} categorías")
+Celda 11: corregir los tipos
+
+python
+# Fecha: de texto a fecha realdf['FECHA PUBLICACIÓN'] = pd.to_datetime(df['FECHA PUBLICACIÓN'])# Latitud y longitud: vienen como texto con coma decimal ("-1,831239")for c in ['LATITUD', 'LONGITUD']:    nulos_antes = df[c].isna().sum()    df[c] = pd.to_numeric(df[c].str.replace(',', '.'), errors='coerce')    print(f"{c}: nulos antes {nulos_antes:,} | después {df[c].isna().sum():,}")print(df[['FECHA PUBLICACIÓN', 'LATITUD', 'LONGITUD']].dtypes)
+Qué debe salir
+Celda 9: 4 columnas afectadas, con 14 valores dañados en total.
+Celda 10: PAIS PRISIÓN 93 → 91, CONSULADO 121 → 120, DELITO 40 → 32 y SITUACIÓN JURÍDICA 8 → 6.
+Celda 11: los nulos de latitud y longitud se quedan en 52.728 antes y después. Ese dato es importante: significa que errors='coerce' no destruyó ningún valor. Después las tres columnas quedan como fecha y dos float64.
+Tus decisiones (con la justificación que debes escribir)
+Reemplazar y no borrar filas. Las filas dañadas son muchísimas (solo SITUACIÓN JURÍDICA tiene 107.477). El dato es válido y el único problema es una tilde perdida, así que borrar eso sería tirar información buena.
+Unir con la categoría limpia. Cada versión dañada tiene su gemela bien escrita (EN INVESTIGACIÓN, NARCOTRÁFICO), así que al reemplazar quedan fusionadas y los conteos por categoría ya no salen partidos.
+errors='coerce'. Lo que no se pueda convertir pasa a nulo en vez de tumbar el código, pero por eso comparamos los nulos antes y después.
+Un borrador de justificación para una celda Markdown (escríbela con tus palabras): "El archivo trae caracteres dañados por un error de codificación en origen. Los corregí con un diccionario en lugar de eliminar filas, porque el contenido es válido y se habrían perdido cientos de miles de registros. Con esto, categorías que eran la misma quedaron unificadas."
+Preguntas que te podría hacer el profe
+¿Por qué no abriste el archivo con otra codificación (encoding='latin-1')? Porque el símbolo � ya está guardado dentro del archivo. Cambiar la codificación al leer no recupera lo que se perdió.
+¿Cómo sabes que la conversión de coordenadas no dañó nada? Comparé los nulos antes y después, y siguen siendo los mismos 52.728.
+¿Por qué to_datetime? Con la fecha como texto no se puede ordenar en el tiempo ni agrupar por año o mes.
+Una corrección mía
+En la revisión inicial te dije que había 25.995 filas con coordenadas (0, 0). Al medirlo ahora sobre LATITUD y LONGITUD ya convertidas, dan 46.227. Usa esta cifra. La vamos a trabajar en la 3b, porque (0, 0) es un punto en el océano frente a África y casi seguro es un valor de relleno y no una ubicación real.
+Corre las celdas 9, 10 y 11, y pásame lo que sale. Sobre todo confirma los números 91 / 120 / 32 / 6 y que los nulos de coordenadas sigan en 52.728.espera antes de correr esas celdas que llevamos hasta ahora para repasar y saber que salio de analisis y tomar apuntes para apremdermelo y que se vea que saque el analis yo jajaja
+Preparando un resumen de estudio en español.
+Preparando un resumen de estudio en español.
+Buena idea, y es lo más útil para la sustentación. Aquí va lo que llevamos, como apuntes para que lo reescribas con tus palabras.
+
+0. Por qué este dataset
+Probamos otros antes. Puertos tenía 9.310 filas (el mínimo es 10.000). Loterías tenía 110k filas, pero ninguna variable cuantitativa real, porque el número ganador es aleatorio. IPS era casi todo códigos.
+Colombianos detenidos en el exterior tiene 388.148 filas y 12 columnas, así que cumple el tamaño de sobra. Además está sucio, y eso es lo que pide la rúbrica de limpieza.
+Fuente: Ministerio de Relaciones Exteriores, publicado en datos.gov.co (URL en la celda 1).
+1. Qué representa una fila
+Cada fila es un grupo de personas (CANTIDAD) con las mismas características, dentro de una foto publicada en una fecha. No es una persona.
+Hay 64 fotos, del 17/09/2018 al 01/11/2025. Cada una suma entre 23.000 y 28.000 personas.
+Hallazgo clave: sumar todo da 1.862.305, pero eso cuenta a las mismas personas muchas veces. La última foto suma 27.586.
+Decisión: para "cuántos hay" uso la última fecha. Para "cómo cambió" comparo el total de cada foto, sin sumarlas.
+2. Diagnóstico (lo que encontramos)
+ProblemaDatoNulos realesUBICACIÓN PAÍS 68,6%; LATITUD y LONGITUD 13,6%Nulos disfrazados (DESCONOCIDO)EXTRADITADO 94,2%; PAIS PRISIÓN 59,3%; GRUPO EDAD 29,7%; DELITO 10,0%Duplicados exactos32.598 (8,4%)Texto dañado (�)4 columnas, 14 valores; categorías partidas en dosTipos mal guardadosFecha y coordenadas como textoCANTIDADMediana 1, promedio 4,8, máximo 460: muy sesgadaSolo una numérica realTendremos que crear variables para el bivariado
+3a. Limpieza de texto y tipos (las celdas 9 a 11, aún por correr)
+Reemplazar y no borrar: el contenido es válido y solo falta una tilde.
+Diccionario de arreglos: cada versión dañada se une a su gemela limpia. Categorías esperadas: 93 → 91, 121 → 120, 40 → 32 y 8 → 6.
+to_datetime para la fecha y coma por punto para las coordenadas, con errors='coerce'. Verificamos que los nulos no cambien (52.728).
+3b. Lo que sigue y lo que tienes que decidir tú
+Nulos: UBICACIÓN PAÍS supera el 50%. El marco del demo la manda a eliminar, y además repite lo de latitud y longitud.
+DESCONOCIDO: ¿lo dejo como categoría o lo convierto en nulo? Depende de la pregunta que quieras responder.
+Coordenadas (0, 0): son 46.227 filas. Es un valor de relleno. Mi corrección: antes te dije 25.995, y ese número no era el correcto.
+Duplicados: 32.598. Hipótesis por confirmar: pueden venir de las cargas múltiples del 24/01/2022 y del 04/01/2023. Aún no lo verifiqué.
+Lo que ya puedes explicar con tus palabras
+Por qué no sumé toda la columna CANTIDAD.
+Por qué DESCONOCIDO no lo ve isnull().
+Por qué reemplacé texto en vez de borrar filas.
+Por qué la mediana de CANTIDAD es 1 y el máximo 460.
+Un consejo para que se note que el análisis es tuyo: en cada decisión escribe una celda Markdown con qué encontraste, qué decidiste y por qué, en tus palabras y con tus propios ejemplos, no con las mías.
+Cuando quieras, corre las celdas 9, 10 y 11 y me cuentas qué te sale. ¿Prefieres que al final te prepare un documento con este repaso completo (procedencia, decisiones y preguntas del profe) para estudiar?
+del 9 PAIS PRISIÓN: 8,216 filas afectadas
+PAIS PRISIÓN
+ESPA�A     7930
+CURA�AO     286
+Name: count, dtype: int64
+CONSULADO: 712 filas afectadas
+CONSULADO
+C. PUERTO ESPA�A    712
+Name: count, dtype: int64
+DELITO: 79,877 filas afectadas
+DELITO
+NARCOTR�FICO                             61954
+NO REPORTA � CONFIDENCIALIDAD ESTATAL     8276
+EXTORSI�N                                 4351
+CONDUCCI�N TEMERARIA                      1624
+DA�OS                                     1501
+FALSIFICACI�N                             1341
+DELITOS POL�TICOS                          381
+COACCI�N                                   344
+CELEBRACI�N INDEBIDA DE CONTRATOS          105
+Name: count, dtype: int64 
+...
+SITUACIÓN JURÍDICA
+EN INVESTIGACI�N            97306
+EN ESPERA DE DEPORTACI�N    10171
+Name: count, dtype: int64 
+Output is truncated. View as a scrollable element or open in a text editor. Adjust cell output settings...  del 10 PAIS PRISIÓN: 93 -> 91 categorías
+CONSULADO: 121 -> 120 categorías
+DELITO: 40 -> 32 categorías
+SITUACIÓN JURÍDICA: 8 -> 6 categorías y del 11 LATITUD: nulos antes 52,728 | después 52,728
+LONGITUD: nulos antes 52,728 | después 52,728
+FECHA PUBLICACIÓN    datetime64[us]
+LATITUD                     float64
+LONGITUD                    float64
+dtype: object
+Investigando valores nulos, desconocidos y duplicados en los datos.
+Investigando valores nulos, desconocidos y duplicados en los datos.
+Coinciden todos los números, así que la 3a quedó bien hecha. Antes de darte la 3b investigo los duplicados y las coordenadas (0, 0), porque ahí dejé dos hipótesis sin confirmar.
+Ejecutó un comando
+Aparecieron hallazgos grandes, dos de ellos inesperados. Antes de explicártelos reviso un dato que me inquietó: en la última foto casi todos tienen país desconocido.
+Se ejecutaron 3 comandos
+Coinciden los números de tus celdas 9, 10 y 11, así que la 3a está bien. Ahora la 3b: duplicados y un hallazgo que cambia cómo vamos a analizar. Probé todo el código antes de dártelo.
+
+Paso 3b: duplicados y país desconocido
+Celda 12 (¿dónde están los duplicados?)
+
+python
+dup = df[df.duplicated()]print(dup.groupby('FECHA PUBLICACIÓN').size().sort_values(ascending=False))
+Celda 13 (eliminar y verificar)
+
+python
+cargas_repetidas = pd.to_datetime(['2022-01-24', '2023-01-04'])en_cargas = df['FECHA PUBLICACIÓN'].isin(cargas_repetidas)filas_antes = len(df)df = df[~(df.duplicated() & en_cargas)]   # borra duplicados SOLO en esas 2 fechasprint(f"Filas: {filas_antes:,} -> {len(df):,}")por_fecha = df.groupby('FECHA PUBLICACIÓN')['CANTIDAD'].agg(personas='sum', filas='size')print(por_fecha.loc[cargas_repetidas])print(por_fecha['personas'].describe())
+Celda 14 (¿cuándo es desconocido el país?)
+
+python
+anio = df['FECHA PUBLICACIÓN'].dt.yeartotal = df.groupby(anio)['CANTIDAD'].sum()desc = df[df['PAIS PRISIÓN'] == 'DESCONOCIDO'].groupby(anio)['CANTIDAD'].sum()print((desc / total * 100).round(1))   # % de personas con país desconocido, por año
+Qué debe salir y qué significa
+Duplicados (celdas 12 y 13):
+De los 32.598, 32.596 están en solo dos fechas: 27.005 el 24/01/2022 y 5.591 el 04/01/2023. Los otros 2 están uno en 2025-10-01 y otro en 2025-11-01.
+La hipótesis que te dejé pendiente quedó confirmada: esas dos fotos se cargaron varias veces. El 24/01/2022 tiene 32.406 filas, que son exactamente 6 veces 5.401. El 04/01/2023 tiene 11.182, exactamente 2 veces 5.591.
+Al borrar quedan 355.552 filas, y todas las fotos quedan con un tamaño parecido: entre 23.284 y 28.058 personas.
+Tu decisión: yo borré solo en esas dos fechas y dejé los 2 duplicados sueltos. En una foto normal, dos filas iguales pueden ser dos grupos distintos con las mismas características, y borrar una cambiaría el total de la última foto (27.586). La alternativa es drop_duplicates() a secas (355.550 filas). Cualquiera sirve si la justificas.
+País desconocido (celda 14):
+Año% de personas con país desconocido20189,3201912,6202015,6202117,2202228,3202395,0202495,6202595,3
+Esto cambia la lectura de lo que te dije en el diagnóstico. El 59% de DESCONOCIDO en PAIS PRISIÓN no es ruido repartido al azar. Hasta 2022 el país casi siempre se reportaba, y desde 2023 en adelante se dejó de reportar. No sé por qué pasó, pero lo que muestran los datos es un corte claro entre finales de 2022 y mediados de 2023.
+Hay más pruebas de lo mismo:
+UBICACIÓN PAÍS solo trae datos entre 2018-09 y 2021-09, así que su 68,6% de nulos es estructural y no aleatorio.
+CONSULADO nunca es DESCONOCIDO (0 filas), y sigue bien reportado en todas las fotos.
+En la última foto, el 95% de las personas tiene país desconocido. Un ranking de países con esa foto pondría a DESCONOCIDO de primero y sería engañoso.
+En PAIS PRISIÓN también aparecen EXTRADICION y REPATRIACION, que no son países. En la última foto suman 1.301 personas.
+Las coordenadas (0, 0): 45.876 de las 46.227 filas (99,2%) tienen país desconocido. Eso confirma que (0, 0) es un relleno y no una ubicación real.
+Lo que tienes que decidir para la 3c
+Para preguntas como "¿en qué países hay más colombianos detenidos?" hay dos caminos:
+A. Usar CONSULADO como ubicación. Siempre está reportado, aunque un consulado es una proxy: no es lo mismo que el país exacto.
+B. Usar PAIS PRISIÓN, pero solo con las fotos hasta 2022.
+Yo combinaría los dos: CONSULADO para las preguntas sobre la situación actual y PAIS PRISIÓN de 2018 a 2022 para ver la evolución por país. Pero piénsalo tú, porque es la decisión que más te van a preguntar.
+Preguntas que te podría hacer el profe
+¿Por qué no usaste drop_duplicates() directo? Porque 32.596 de los 32.598 duplicados venían de dos fechas cargadas varias veces, y eso lo comprobé con la división exacta. Los 2 restantes pueden ser grupos legítimos.
+¿Cómo sabes que quedó bien? Después de borrar, todas las fotos suman entre 23.000 y 28.000 personas, y el 24/01/2022 pasó de 32.406 a 5.401 filas.
+¿Por qué no rellenaste los DESCONOCIDO? Porque no faltan al azar: dejaron de reportarse desde 2023, y rellenarlos inventaría un país que no sabemos.
+Actualiza tus apuntes: la hipótesis de las cargas repetidas ya está confirmada, y el DESCONOCIDO de PAIS PRISIÓN es un problema por período, no general.
+Corre las celdas 12, 13 y 14 y confírmame los números: 355.552 filas y el 95% en 2023 a 2025. Ya con eso, en la 3c decidimos qué hacer con los nulos.antes de correrer las 12 13 y 14 necesito compartir lo qie tenemos hasta ahora con alguine me podiras decir que llevamos hecho y que analisis hemos sacado hasta ahora para que ellos miren y entiendan todod y puedan sacar apuntes tambien
+Archivo leído, creó un archivo y 2 herramientas más
+
+Colombianos detenidos en el exterior: resumen del análisis
+Artefacto·Solo tú 
+Armé una página con el resumen completo para que la compartas. Por ahora solo tú puedes verla; cuando quieras, la compartes con el enlace o con el botón de compartir de la tarjeta.
+Tiene lo que llevamos hasta ahora:
+La ficha del dataset, con la fuente y la URL.
+Qué representa una fila y por qué no se suma toda la columna CANTIDAD.
+El diagnóstico inicial.
+La limpieza de la 3a, con los números que tú confirmaste.
+Los hallazgos de la 3b: los duplicados por cargas repetidas y el país que dejó de reportarse desde 2023.
+Una tabla de decisiones tomadas y pendientes, lo que falta y 5 preguntas posibles del profe con su respuesta.
+Un detalle importante para quien lo lea: las celdas 12, 13 y 14 (la 3b) las probé yo, pero tú todavía no las has corrido. En la página aparecen como hallazgos verificados y las decisiones de duplicados y ubicación como "por confirmar" o "pendientes", para que nadie crea que ya están en tu notebook.
+Si prefieres mandarlo como archivo (Word o PDF) en vez de enlace, dime y lo convierto.
+Cuando vuelvas, corre las celdas 12, 13 y 14 y confírmame los números: 355.552 filas y el 95% de país desconocido en 2023 a 2025.
+12 FECHA PUBLICACIÓN
+2022-01-24    27005
+2023-01-04     5591
+2025-10-01        1
+2025-11-01        1
+dtype: int64   13 Filas: 388,148 -> 355,552
+            personas  filas
+2022-01-24     26869   5401
+2023-01-04     27918   5591
+count       64.00
+mean    26,563.16
+std        797.29
+min     23,284.00
+25%     26,262.75
+50%     26,483.00
+75%     26,940.50
+max     28,058.00
+Name: personas, dtype: float64 y 14 FECHA PUBLICACIÓN
+2018    9.30
+2019   12.60
+2020   15.60
+2021   17.20
+2022   28.30
+2023   95.00
+2024   95.60
+2025   95.30
+Name: CANTIDAD, dtype: float64 no hagas nada mas solo mira lo que salio y ponlo en el cosos que voy a comparatir para que lo miren
+Ejecutó un comando
+
+Colombianos detenidos en el exterior: resumen del análisis
+Artefacto·Solo tú 
+Listo, actualicé la misma página (el enlace no cambia, así que si ya lo compartiste, verán la versión nueva).
+Lo que salió en tus celdas 12, 13 y 14 coincide con mis números, y lo agregué así:
+Celda 12: la tabla de duplicados por fecha (27.005, 5.591, 1 y 1).
+Celda 13: el paso de 388.148 a 355.552 filas, las dos fechas repetidas ya con un solo juego de datos (5.401 y 5.591 filas) y el resumen de personas por foto (mínimo 23.284, máximo 28.058).
+Celda 14: el porcentaje de país desconocido por año, que ya estaba en la tabla de la página.
+También cambié el estado de la página a "celdas 1 a 14 ya ejecutadas", y en la tabla de decisiones la de duplicados pasó de "propuesta" a "ejecutada". Lo demás no lo toqué.
+entonces crees que debo mandar ese y el jupyter de visual tambien para que lo miren?
+Deciding to share both deliverables with guidance.
+Deciding to share both deliverables with guidance.
+Sí, mándalos los dos, porque sirven para cosas distintas:
+La página es para entender y tomar apuntes: explica qué hicimos, por qué y qué salió, sin tener que leer código.
+El notebook es el entregable y el que muestra el código funcionando. Quien lo abra puede seguir cada celda con sus resultados.
+Antes de mandar el notebook:
+Córrelo completo de arriba abajo (Run All, o reinicia el kernel y corre todo). Así comprobamos que funciona en orden y no depende de celdas que corriste sueltas.
+Guárdalo con Ctrl+S después de correrlo. Los resultados quedan guardados dentro del archivo .ipynb, y así quien lo abra ve los números sin tener que correr nada.
+Avísales que está a medias. Solo llevamos hasta el paso 3b. Faltan los nulos, el univariado, el bivariado, los groupby y las conclusiones.
+El CSV: para volver a correr el notebook necesitan el archivo en la misma carpeta. Si pesa mucho para mandarlo, que lo descarguen desde la URL del dataset, que ya está en la primera celda.
+Sobre lo del "que se vea que lo sacaste tú": la página tiene mis palabras, y eso está bien para estudiar y compartir apuntes. En el notebook, en cambio, las explicaciones sí deberían estar en las tuyas. Antes de mandarlo, agrega una celda Markdown debajo de cada decisión (texto dañado, duplicados, país desconocido) con tres cosas: qué encontraste, qué decidiste y por qué. Es lo que pide la rúbrica de "limpieza visible", y es lo que te van a preguntar en la sustentación. Además, conviene que revises si tu curso tiene alguna regla sobre declarar el uso de herramientas como esta.
+¿Quieres que te ayude a redactar esas celdas Markdown de justificación? Te doy una guía para cada una y las escribes con tus palabras. listo todo eso es todo lo que hablosmos
