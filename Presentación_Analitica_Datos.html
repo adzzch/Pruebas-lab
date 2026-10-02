@@ -24,9 +24,9 @@ h2{font-size:clamp(26px,3.6vw,42px)}
 .big{font-family:"Bitter",Georgia,serif;font-size:clamp(40px,7vw,88px);font-weight:700;color:var(--a);line-height:1;margin-bottom:.2em}
 .q{display:inline-block;background:var(--hl);padding:.1em .55em;border-radius:3px;margin-bottom:.9em;font-size:.9em}
 ul.plain{list-style:none;padding:0;margin:1em 0 0}
-ul.plain li{padding:.7em 0;border-top:1px solid var(--line)}
-ul.plain li:last-child{border-bottom:1px solid var(--line)}
-ul.plain b{color:var(--a)}
+ul.plain li,ol.plain li{padding:.7em 0;border-top:1px solid var(--line)}
+ul.plain li:last-child,ol.plain li:last-child{border-bottom:1px solid var(--line)}
+ul.plain b,ol.plain b{color:var(--a)}
 .chart{padding:clamp(4px,1vw,12px) 0}
 .row{display:grid;grid-template-columns:minmax(90px,150px) 1fr 3.4em;gap:.6em;align-items:center;margin:.4em 0;font-size:.88em}
 .row span:first-child{text-align:right;color:var(--mute)}
@@ -34,6 +34,7 @@ ul.plain b{color:var(--a)}
 .fill{height:100%;background:var(--a)}
 .fill.b{background:var(--b)}
 .row .v{font-weight:600}
+.w .row{grid-template-columns:minmax(120px,210px) 1fr 5em}
 .pair .track{height:.75em;margin:2px 0}
 .leg{display:flex;gap:1.2em;font-size:.85em;margin-bottom:.6em}
 .dot{display:inline-block;width:.8em;height:.8em;border-radius:2px;margin-right:.35em;background:var(--a)}
@@ -62,14 +63,33 @@ button:focus-visible{outline:3px solid var(--b);outline-offset:2px}
 </div></section>
 
 <section class="slide"><div class="grid">
-<div><h2>Antes de responder: ¿qué estamos contando?</h2>
-<div class="big">355.552 filas</div>
-<p class="lead">no son 355.552 personas. Si las sumáramos, contaríamos muchas veces a la misma gente.</p></div>
-<div class="chart"><ul class="plain" style="margin-top:0">
-<li><b>Cada fila es un grupo</b> de personas (columna CANTIDAD), no un individuo.</li>
-<li><b>Cada foto mensual repite a las mismas personas.</b> Por eso usamos una sola foto, la del 01/11/2025: 27.586 personas en 117 consulados.</li>
-<li><b>La ubicación se mide por consulado.</b> Desde 2023 el país de prisión no se reporta.</li>
-<li><b>Una trampa escondida:</b> una categoría de delito escrita con dos guiones distintos habría producido un salto falso en 2022. La unimos.</li></ul></div>
+<div><h2>¿Qué hicimos?</h2>
+<p class="lead">Un recorrido en cinco pasos, de los datos crudos a las respuestas.</p></div>
+<div class="chart"><ol class="plain" style="list-style:none;padding:0;margin:0">
+<li><b>1. De dónde salen los datos.</b> Un conjunto de la Cancillería en datos.gov.co: 388.148 filas repartidas en 64 fotos publicadas entre 2018 y 2025.</li>
+<li><b>2. Limpieza con justificación.</b> Texto dañado, tipos de datos, duplicados, nulos y valores atípicos, cada decisión explicada. Quedaron 355.552 filas.</li>
+<li><b>3. Exploración.</b> Primero cada variable por separado y luego relaciones entre pares, como personas y filas por consulado.</li>
+<li><b>4. Agregaciones con groupby.</b> Por consulado, delito, tiempo, género y edad, siempre con porcentajes dentro de cada grupo.</li>
+<li><b>5. Conclusiones.</b> Una respuesta para cada pregunta, con sus límites a la vista.</li></ol></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><span class="q">Paso 2: limpieza (ETL)</span><h2>Lo que había que arreglar</h2>
+<p class="lead">Cinco problemas distintos en los datos crudos. Cada uno se resolvió con una decisión justificada, y de 388.148 filas quedaron 355.552.</p>
+<p class="note">El hallazgo clave: desde 2023 el país de prisión casi no se reporta. Por eso ubicamos a los detenidos por consulado.</p></div>
+<div class="chart"><div id="e1" class="w"></div><p class="mute" style="font-size:.8em;margin:.4em 0 1.2em">Filas afectadas por cada problema (de 388.148).</p>
+<div class="cols" id="e2" style="height:150px"></div><div class="lab" id="e2l"></div><p class="mute" style="font-size:.8em;margin:.6em 0 0">% de personas con país de prisión desconocido, por año (datos originales).</p></div>
+</div></section>
+
+<section class="slide"><div class="grid">
+<div><span class="q">Paso 3: exploración (EDA)</span><h2>Lo que mostraron los datos antes de preguntarles nada</h2>
+<p class="lead">355.552 filas no son 355.552 personas: cada foto repite a la misma gente. Por eso usamos una sola, la del 01/11/2025, con 27.586 personas.</p>
+<ul class="plain"><li>La mitad de las filas (55,7 %) es una sola persona: el promedio es 4,8 y la mediana 1.</li>
+<li>Entre los 117 consulados, la mediana es 59 personas y el promedio 236. Unos pocos pesan mucho.</li></ul></div>
+<div class="chart"><p style="margin:0 0 .3em"><b>Las filas más grandes pesan más de lo que parece</b></p><div id="d1"></div>
+<p class="mute" style="font-size:.8em;margin:.3em 0 1.4em">12,3 % de las filas (las atípicas) frente al % de personas que reúnen.</p>
+<p style="margin:0 0 .3em"><b>Pocos consulados concentran a casi todos</b></p><div id="d2"></div>
+<p class="mute" style="font-size:.8em;margin:.3em 0 0">% de las personas que reúnen los consulados más grandes.</p></div>
 </div></section>
 
 <section class="slide"><div class="grid">
@@ -141,6 +161,13 @@ document.getElementById('c4').innerHTML=g.map(function(r){
   return '<div class="row pair"><span>'+r[0]+'</span><div><div class="track"><div class="fill" style="width:'+(r[1]/50*100)+'%"></div></div><div class="track"><div class="fill b" style="width:'+(r[2]/50*100)+'%"></div></div></div><span class="v">'+String(r[1]).replace('.',',')+' / '+String(r[2]).replace('.',',')+'</span></div>';
 }).join('');
 
+
+bars('e1',[['Texto dañado: situación jurídica',107477,'107.477'],['Texto dañado: delito',79877,'79.877'],['Coordenadas falsas (0, 0)',39352,'39.352'],['Filas repetidas por recargas',32596,'32.596'],['Un estado puesto como país',10626,'10.626'],['Delito con dos guiones',3843,'3.843']]);
+var pd=[['2018',9.3],['2019',12.6],['2020',15.6],['2021',17.2],['2022',28.3],['2023',95.0],['2024',95.6],['2025',95.3]];
+document.getElementById('e2').innerHTML=pd.map(function(a){return '<div class="col">'+Math.round(a[1])+'%<i style="height:'+(a[1]/100*80)+'%"></i></div>';}).join('');
+document.getElementById('e2l').innerHTML=pd.map(function(a){return '<span>'+a[0]+'</span>';}).join('');
+bars('d1',[['% de las filas',12.3,'12,3'],['% de las personas',67.9,'67,9']],'b');
+bars('d2',[['5 más grandes',34.5,'34,5'],['10 más grandes',51.0,'51,0'],['15 más grandes',62.5,'62,5']]);
 var slides=[].slice.call(document.querySelectorAll('.slide')), i=0;
 var prev=document.getElementById('prev'), next=document.getElementById('next'), count=document.getElementById('count');
 function show(n){
